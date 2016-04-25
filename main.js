@@ -1,10 +1,11 @@
 var  Burglar = function(name){
     this.name = name
     this.dead = false
-    this.stuff = ["knoife", "lockpick", "gloves", "map", "grappling hook"]
+    this.stuff = ["knife", "lockpick", "gloves", "map", "grappling hook"]
 
 }
 
+var ourThieves = ["Jeff", "Jill", "Robert"]
 
 Burglar.prototype.steal = function(victim){
     if(victim.stuff.length != 0){
@@ -33,8 +34,8 @@ Burglar.prototype.steal = function(victim){
 
 var cityOfThieves = []
 
-for (var i = 0; i < 10; i++){
-    cityOfThieves.push(new Burglar('alice-' + i))
+for (var i = 0; i < 3; i++){
+    cityOfThieves.push(new Burglar(ourThieves[i]))
 }
 
 // console.log(cityOfThieves)
