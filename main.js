@@ -1,3 +1,5 @@
+
+
 var  Burglar = function(name){
     this.name = name
     this.dead = false
@@ -12,15 +14,15 @@ Burglar.prototype.steal = function(victim){
         var item = victim.stuff.pop()
         this.stuff.push(item)
         // this.stuff.push(victim.stuff.pop())
-        console.log(this.name + ' stole ' + item + ' from ' + victim.name + ".")
-        console.log(this.name + ' now has ' + this.stuff.join(', ') + '.')
-        console.log(victim.name + ' now has ' + victim.stuff.join(', ') + '.')
-         console.log('===-======-=====')
+        document.write("<b>" + this.name + ' stole ' + item + ' from ' + victim.name + "." + "</b>" + "<br>")
+        document.write(this.name + ' now has ' + this.stuff.join(', ') + '.' + "<br>")
+        document.write(victim.name + ' now has ' + victim.stuff.join(', ') + '.' + "<br>")
+         document.write('===-======-=====' + "<br>")
         
         
     }  else {
         victim.dead = true
-        console.log('hasta la vista, ' + victim.name)
+        document.write("<h2 style=color:red>" + victim.name + " is sleeping with the fishes." + "</h2>" + "<br>")
         console.log('===-======-=====')
     }
     
@@ -49,9 +51,7 @@ var randomTheft = function(){
     }
 }
 
-
 burgleInterval = setInterval(function(){
-    
     cityOfThieves = cityOfThieves.filter(function(thief){
         if      (thief.dead === false){return true}
         else if (thief.dead === true){return false}
@@ -62,8 +62,11 @@ burgleInterval = setInterval(function(){
         randomTheft()
     }
     else{
-        console.log(cityOfThieves[0].name + ' says: There can be only be one.')
+        document.write("<h1>" + cityOfThieves[0].name + ' says: There can be only be one.' + '</h1>')
         clearInterval(burgleInterval)
     }
-  console.log('...later')  
+    
+ 
+  
+  
 }, 2)
