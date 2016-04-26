@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='Begin'>
   <head>
     <meta charset="UTF-8">
     <title>title</title>
     <link rel="stylesheet" href="main.css" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.4/angular.js"></script>
   </head>
-  <body>
+  <body ng-controller='myController as myCtrl'>
+  <p>{{ myCtrl.intro }}</p>
   
+<button ng-click='myCtrl.startCrime()'>Click me</button>
   <div id="cityofthieves">
       
       

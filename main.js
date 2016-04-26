@@ -1,4 +1,11 @@
+angular.module('Begin',[])
+    .controller('myController', ['$interval',crimeSpree])
 
+function crimeSpree($interval){
+    
+    var ctrl = this
+
+    ctrl.intro = "Night has fallen on Verrakis.  The thieves have come out to play in a 'winner take all' crime spree.  The stakes are high as losing all your possessions leaves you vulnerable to assassins and you'll end up 'sleeping with the fishes'"
 
 var  Burglar = function(name){
     this.name = name
@@ -13,17 +20,18 @@ Burglar.prototype.steal = function(victim){
     if(victim.stuff.length != 0){
         var item = victim.stuff.pop()
         this.stuff.push(item)
-        // this.stuff.push(victim.stuff.pop())
-        document.write("<b>" + this.name + ' stole ' + item + ' from ' + victim.name + "." + "</b>" + "<br>")
-        document.write(this.name + ' now has ' + this.stuff.join(', ') + '.' + "<br>")
-        document.write(victim.name + ' now has ' + victim.stuff.join(', ') + '.' + "<br>")
-         document.write('===-======-=====' + "<br>")
+        this.stuff.push(victim.stuff.pop())
+        
+        ctrl.intro += "<b>" + this.name + ' stole ' + item + ' from ' + victim.name + "." + "</b>" + "<br>"
+        ctrl.intro += this.name + ' now has ' + this.stuff.join(', ') + '.' + "<br>"
+        ctrl.intro +=victim.name + ' now has ' + victim.stuff.join(', ') + '.' + "<br>"
+        ctrl.intro +='===-======-=====' + "<br>"
+        
         
         
     }  else {
         victim.dead = true
-        document.write("<h2 style=color:red>" + victim.name + " is sleeping with the fishes." + "</h2>" + "<br>")
-        console.log('===-======-=====')
+        ctrl.intro +=("<h2 style=color:red>" + victim.name + " is sleeping with the fishes." + "</h2>" + "<br>")
     }
     
 }
@@ -48,10 +56,13 @@ var randomTheft = function(){
     var victim = cityOfThieves[Math.floor(Math.random() * cityOfThieves.length)]
     if (burglar !== victim){
         burglar.steal(victim)
+           console.log(ctrl.intro)
     }
 }
 
-burgleInterval = setInterval(function(){
+ctrl.startCrime = function(){
+    console.log("Test")
+    burgleInterval = $interval(function(){
     cityOfThieves = cityOfThieves.filter(function(thief){
         if      (thief.dead === false){return true}
         else if (thief.dead === true){return false}
@@ -62,11 +73,12 @@ burgleInterval = setInterval(function(){
         randomTheft()
     }
     else{
-        document.write("<h1>" + cityOfThieves[0].name + ' says: There can be only be one.' + '</h1>')
-        clearInterval(burgleInterval)
+        ctrl.intro +=("<h1>" + cityOfThieves[0].name + ' says: There can be only be one.' + '</h1>')
+        $interval.cancel(burgleInterval)
     }
+}, 2) 
+        }
+
     
  
-  
-  
-}, 2)
+}
